@@ -9,25 +9,22 @@ interface RetreatsModalProps {
   onOpenReservation: () => void;
 }
 
-const RETREATS = [
-  {
-    id: 'r-sobotni-lekce',
-    title: 'Sobotní lekce jógy',
-    date: 'Sobota 15. 8. 2026 (od 8:30)',
-    location: 'Letní kino, Strážnice',
-    price: 130,
-    priceLabel: 'Cena lekce:',
-    badge: 'Neomezený počet míst',
-    image: IMAGES.sobotniPoster,
-    description: 'Venkovní ranní lekce jógy v Letním kině.',
-    highlights: [
-      'Ranní jógové cvičení v Letním kině',
-      'Vhodné pro všechny pokročilosti',
-      'Přihlašování přes Reservio nebo tel. 734 182 389'
-    ],
-    externalLink: 'https://www.reservio.cz/b/straznicke-jogovani',
-    ctaText: 'Mám zájem'
-  },
+interface RetreatItem {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  price: number;
+  priceLabel: string;
+  badge: string;
+  image: string;
+  description: string;
+  highlights: string[];
+  externalLink?: string;
+  ctaText?: string;
+}
+
+const RETREATS: RetreatItem[] = [
   {
     id: 'r-nivamare',
     title: 'Wellness pobyt s jógou',
