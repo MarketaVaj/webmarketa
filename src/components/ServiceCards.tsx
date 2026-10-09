@@ -64,7 +64,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({
               Jógové pobyty a akce
             </h2>
             <p className="font-sans text-xs sm:text-sm font-semibold uppercase tracking-[1.5px] text-[#ECE8E2] opacity-90">
-              DOPŘEJTE SI NĚKOLIK DNÍ KLIDU
+              DOPŘEJTE SI NĚKOLIK CHVIL ČI DNÍ KLIDU
             </p>
           </div>
         </div>

@@ -32,7 +32,7 @@ const RETREATS: RetreatItem[] = [
     location: 'Wellness hotel Nivamare Luhačovice',
     price: 4700,
     priceLabel: 'Celková cena pobytu:',
-    badge: 'Poslední 2 místa',
+    badge: 'Obsazeno',
     image: IMAGES.poster,
     description: 'Předvánoční zklidnění naplněné jógou, se dvěma lektorkami, wellness odpočinkem a to vše v krásném prostředí Luhačovické přehrady.',
     highlights: [
