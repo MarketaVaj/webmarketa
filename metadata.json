@@ -1,0 +1,6 @@
+{
+  "name": "Strážnické jogování",
+  "description": "Landing page a webový portál pro Strážnické jogování – lekce jógy, pobyty, rezervace a dárkové poukazy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

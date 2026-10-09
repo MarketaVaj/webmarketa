@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #F5F1EA;
+    --ink: #24211D;
+    --accent: #65744B;
+    --accent-hover: #586640;
+    --muted: #56514A;
+    --light: #ECE8E2;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-main);
+    color: var(--ink);
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--ink);
+    font-family: var(--sans);
+  }
+}
+
+.font-serif {
+  font-family: var(--serif);
+}
+
+.font-sans {
+  font-family: var(--sans);
+}
+
+/* Custom scrollbar matching Artistic Flair theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F1EA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4BCAF;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #65744B;
+}
