@@ -5,6 +5,7 @@ export type ModalType =
   | 'lessons' 
   | 'about' 
   | 'vouchers' 
+  | 'gallery'
   | 'privacy' 
   | null;
 

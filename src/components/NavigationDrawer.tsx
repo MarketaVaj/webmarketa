@@ -109,6 +109,14 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
               </button>
 
               <button
+                onClick={() => handleNavClick('gallery')}
+                className="w-full text-left font-serif text-3xl sm:text-4xl hover:text-[#A3B18A] transition-colors flex items-center justify-between group cursor-pointer"
+              >
+                <span>Fotogalerie</span>
+                <ArrowRight className="w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#A3B18A]" />
+              </button>
+
+              <button
                 onClick={() => handleNavClick('vouchers')}
                 className="w-full text-left font-serif text-3xl sm:text-4xl hover:text-[#A3B18A] transition-colors flex items-center justify-between group cursor-pointer"
               >

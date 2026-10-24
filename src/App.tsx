@@ -10,6 +10,7 @@ import { RetreatsModal } from './components/RetreatsModal';
 import { LessonsModal } from './components/LessonsModal';
 import { AboutModal } from './components/AboutModal';
 import { VouchersModal } from './components/VouchersModal';
+import { GalleryModal } from './components/GalleryModal';
 import { PrivacyModal } from './components/PrivacyModal';
 import { ModalType } from './types';
 
@@ -44,15 +45,16 @@ export default function App() {
           onOpenReservation={() => handleOpenModal('reservation')}
         />
 
-        {/* 2. Large Service Cards Section (Rezervace & Jógové pobyty) */}
+        {/* 2. First Row Cards: Rezervace, Jógové pobyty a akce, Lekce */}
         <ServiceCards
           onOpenRetreats={() => handleOpenModal('retreats')}
+          onOpenLessons={() => handleOpenModal('lessons')}
         />
 
-        {/* 3. Small Cards Section (Lekce, O mně, Dárkové poukazy) */}
+        {/* 3. Second Row Cards: O mně, Fotogalerie, Dárkové poukazy */}
         <SmallCards
-          onOpenLessons={() => handleOpenModal('lessons')}
           onOpenAbout={() => handleOpenModal('about')}
+          onOpenGallery={() => handleOpenModal('gallery')}
           onOpenVouchers={() => handleOpenModal('vouchers')}
         />
       </main>
@@ -96,6 +98,11 @@ export default function App() {
 
       <VouchersModal
         isOpen={activeModal === 'vouchers'}
+        onClose={handleCloseModal}
+      />
+
+      <GalleryModal
+        isOpen={activeModal === 'gallery'}
         onClose={handleCloseModal}
       />
 

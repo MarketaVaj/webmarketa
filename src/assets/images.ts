@@ -11,6 +11,9 @@ import voucherDesign1 from './images/beige.png';
 import voucherDesign2 from './images/žlutý.png';
 import voucherDesign3 from './images/elegantní.png';
 
+import outdoorImage from './images/retreats_yoga_outdoor_1785652312222.jpg';
+import forestHeroImage from './images/hero_yoga_forest_1785508166017.jpg';
+
 export const IMAGES = {
   hero: heroImage,
   studio: studioImage,
@@ -21,7 +24,11 @@ export const IMAGES = {
   poster: posterImage,
   pobyty: pobytyImage,
   sobotniPoster: sobotniPosterImage,
+  outdoor: outdoorImage,
+  forest: forestHeroImage,
   voucherDesign1,
   voucherDesign2,
   voucherDesign3,
+  indiePoster: '/assets/aistudio/Indie_Vaj_nerov__A3_8535b793.jpg',
+  zitkovaPoster: '/assets/aistudio/Brown_Floral_Massage_Retreat_Poster_a57e977f.png',
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Calendar, MapPin, CheckCircle, Sparkles, Send, Users, Coffee, Heart } from 'lucide-react';
+import { X, Calendar, MapPin, CheckCircle, Sparkles, Send, Users, Coffee, Heart, Mail } from 'lucide-react';
 import { IMAGES } from '../assets/images';
 
 interface RetreatsModalProps {
@@ -14,14 +14,18 @@ interface RetreatItem {
   title: string;
   date: string;
   location: string;
-  price: number;
-  priceLabel: string;
+  price?: number;
+  priceLabel?: string;
   badge: string;
+  badgeColor?: string;
+  posterBg?: string;
   image: string;
   description: string;
-  highlights: string[];
+  highlights?: string[];
+  highlightsTitle?: string;
   externalLink?: string;
   ctaText?: string;
+  noReservation?: boolean;
 }
 
 const RETREATS: RetreatItem[] = [
@@ -32,7 +36,9 @@ const RETREATS: RetreatItem[] = [
     location: 'Wellness hotel Nivamare Luhačovice',
     price: 4700,
     priceLabel: 'Celková cena pobytu:',
-    badge: 'Obsazeno',
+    badge: '1 volné místo',
+    badgeColor: 'bg-[#C05621]',
+    posterBg: 'bg-[#1E434C]',
     image: IMAGES.poster,
     description: 'Předvánoční zklidnění naplněné jógou, se dvěma lektorkami, wellness odpočinkem a to vše v krásném prostředí Luhačovické přehrady.',
     highlights: [
@@ -42,7 +48,48 @@ const RETREATS: RetreatItem[] = [
       'Neomezený vstup do wellness a saunového světa',
       'Zapůjčení županu',
       'Místní poplatek v ceně'
-    ]
+    ],
+    highlightsTitle: 'Cena zahrnuje:',
+    ctaText: 'Rezervace emailem',
+    externalLink: 'mailto:straznickejogovani@gmail.com?subject=Rezervace%20-%20Wellness%20pobyt%20s%20j%C3%B3gou%20Luha%C4%8Dovice'
+  },
+  {
+    id: 'r-zitkova',
+    title: 'Víkendový pobyt s jógou',
+    date: '12. 3. – 14. 3. 2027',
+    location: 'Hotel Kopanice – Žítková',
+    price: 4300,
+    priceLabel: 'Cena:',
+    badge: 'Volná místa',
+    badgeColor: 'bg-[#65744B]',
+    posterBg: 'bg-[#38281E]',
+    image: IMAGES.zitkovaPoster,
+    description: 'Víkendový pobyt s jógou v kouzelné a tajuplné krajině Bílých Karpat na Žítkové. Čeká vás harmonická jógová praxe obohacená o aromaterapii, společná procházka malebnou krajinou Žítkovských bohyní, lahodná polopenze a ničím nerušený odpočinek ve vířivce a hotelovém wellness.',
+    highlights: [
+      'Ubytování na 2 noci',
+      'Polopenzi',
+      '7 lekcí jógy',
+      'Lekce s aromaterapií',
+      'Procházku po malebné krajině Žítkovských bohyní',
+      'Neomezený vstup do vířivky a wellness / saunového světa',
+      'Místní poplatek v ceně',
+      'Min. počet účastníků: 10'
+    ],
+    highlightsTitle: 'Cena zahrnuje:',
+    ctaText: 'Rezervace emailem',
+    externalLink: 'mailto:straznickejogovani@gmail.com?subject=Rezervace%20-%20V%C3%ADkendov%C3%BD%20pobyt%20s%20j%C3%B3gou%20%C5%BD%C3%ADtkov%C3%A1'
+  },
+  {
+    id: 'a-indie-beseda',
+    title: 'Indie – země chutí, vůní, historie a jógy',
+    date: '12. 1. v 17:30',
+    location: 'Komunitní centrum Strážnice (ve spolupráci s Knihovnou Strážnice)',
+    badge: 'Bez rezervací',
+    badgeColor: 'bg-[#65744B]',
+    posterBg: 'bg-[#1E434C]',
+    image: IMAGES.indiePoster,
+    description: 'Beseda, která vám přiblíží kousek obrovské a fascinující země plné kontrastů. Země, kde historické památky berou dech a nad jejich velkolepostí se nepřestáváte ptát: Jak tohle mohl někdo postavit? Představí vám kus jógového světa, protože v zemi má tato praxe hluboké kořeny, a zároveň vám ukáže jinou tvář Indie – rušnou, hlasitou a neustále v pohybu. Ulice plné lidí, aut a všudypřítomných tuktuků vytvářející nezaměnitelný chaos, ve kterém se mísí troubení, pouliční ruch a každodenní život milionů lidí. A co by to byla za beseda bez zmínky o místní kuchyni. Tu nelze přehlédnout, voňavá, pestrá, plná koření a překvapivých chutí. Dobré jídlo se zde stává zážitkem samo o sobě a přiměje vás zpomalit a zapomenout na hluk přelidněných ulic.',
+    noReservation: true
   }
 ];
 
@@ -103,7 +150,7 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
                     Jógové pobyty a akce
                   </h3>
                   <p className="text-xs text-[#ECE8E2] font-sans">
-                    Dopřejte si několik dní hluboké relaxace, jógy a přírody
+                    Dopřejte si několik chvil či dní klidu, jógy a inspirace
                   </p>
                 </div>
               </div>
@@ -125,7 +172,12 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
                     {RETREATS.map((retreat) => (
                       <div
                         key={retreat.id}
-                        onClick={() => setSelectedRetreat(retreat.id)}
+                        onClick={() => {
+                          setSelectedRetreat(retreat.id);
+                          if (retreat.noReservation) {
+                            setIsPosterLightboxOpen(true);
+                          }
+                        }}
                         className={`group relative rounded-2xl overflow-hidden border transition-all cursor-pointer ${
                           selectedRetreat === retreat.id
                             ? 'bg-white border-[#65744B] ring-2 ring-[#65744B]/20 shadow-lg'
@@ -140,7 +192,7 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
                               setSelectedRetreat(retreat.id);
                               setIsPosterLightboxOpen(true);
                             }}
-                            className="md:col-span-5 relative min-h-[300px] md:min-h-[380px] bg-[#1E434C] overflow-hidden flex items-center justify-center cursor-pointer group/poster p-1.5"
+                            className={`md:col-span-5 relative min-h-[320px] md:min-h-[400px] ${retreat.posterBg || 'bg-[#1E434C]'} overflow-hidden flex items-center justify-center cursor-pointer group/poster p-1.5`}
                           >
                             <img
                               src={retreat.image}
@@ -148,7 +200,7 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
                               referrerPolicy="no-referrer"
                               className="w-full h-full object-contain transition-transform duration-700 group-hover/poster:scale-[1.03]"
                             />
-                            <div className="absolute top-3 left-3 bg-[#65744B] text-white text-xs font-semibold px-3 py-1 rounded-full shadow z-10">
+                            <div className={`absolute top-3 left-3 ${retreat.badgeColor || 'bg-[#65744B]'} text-white text-xs font-semibold px-3 py-1 rounded-full shadow z-10`}>
                               {retreat.badge}
                             </div>
                             <button
@@ -167,8 +219,8 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
 
                           {/* Detail column */}
                           <div className="md:col-span-7 p-6 space-y-4 flex flex-col justify-between">
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-3 text-xs text-[#65744B] font-semibold">
+                            <div className="space-y-3">
+                              <div className="flex flex-wrap items-center gap-3 text-xs text-[#65744B] font-semibold">
                                 <span className="flex items-center gap-1">
                                   <Calendar className="w-3.5 h-3.5" />
                                   {retreat.date}
@@ -183,44 +235,63 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
                                 {retreat.title}
                               </h4>
 
-                              <p className="text-sm text-[#56514A] leading-relaxed">
-                                {retreat.description}
-                              </p>
-                            </div>
-
-                            {/* Program Highlights */}
-                            <div className="space-y-1.5 pt-2 border-t border-[#E2DAD0]">
-                              <p className="text-xs font-semibold text-[#56514A] uppercase tracking-wider">Cena zahrnuje:</p>
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-[#56514A]">
-                                {retreat.highlights.map((h, i) => (
-                                  <div key={i} className="flex items-center gap-1.5">
-                                    <CheckCircle className="w-3.5 h-3.5 text-[#65744B] shrink-0" />
-                                    <span>{h}</span>
-                                  </div>
+                              <div className="space-y-2.5">
+                                {retreat.description.split('\n\n').map((paragraph, pIdx) => (
+                                  <p key={pIdx} className="text-sm text-[#56514A] leading-relaxed">
+                                    {paragraph}
+                                  </p>
                                 ))}
                               </div>
                             </div>
 
-                            {/* Price and CTA */}
-                            <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#E2DAD0]">
-                              <div>
-                                <span className="text-xs text-[#56514A]">{retreat.priceLabel || 'Cena:'}</span>
-                                <div className="font-serif text-2xl font-bold text-[#24211D]">
-                                  {retreat.price.toLocaleString('cs-CZ')} Kč
+                            {/* Program Highlights */}
+                            {retreat.highlights && retreat.highlights.length > 0 && (
+                              <div className="space-y-1.5 pt-3 border-t border-[#E2DAD0]">
+                                <p className="text-xs font-semibold text-[#56514A] uppercase tracking-wider">
+                                  {retreat.highlightsTitle || 'Cena zahrnuje:'}
+                                </p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-[#56514A]">
+                                  {retreat.highlights.map((h, i) => (
+                                    <div key={i} className="flex items-center gap-1.5">
+                                      <CheckCircle className="w-3.5 h-3.5 text-[#65744B] shrink-0" />
+                                      <span>{h}</span>
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
+                            )}
 
-                              {retreat.externalLink ? (
+                            {/* Price and CTA */}
+                            {retreat.noReservation ? (
+                              <div className="pt-3 border-t border-[#E2DAD0] flex items-center">
+                                <span className="text-sm font-semibold text-[#65744B] bg-[#65744B]/10 px-4 py-2 rounded-full border border-[#65744B]/20">
+                                  Bez rezervací - Vstupné dobrovolné
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#E2DAD0]">
+                                <div>
+                                  <span className="text-xs text-[#56514A]">{retreat.priceLabel || 'Cena:'}</span>
+                                  <div className="font-serif text-2xl font-bold text-[#24211D]">
+                                    {typeof retreat.price === 'number'
+                                      ? `${retreat.price.toLocaleString('cs-CZ')} Kč`
+                                      : 'Vstup volný'}
+                                  </div>
+                                </div>
+
+                                {retreat.externalLink ? (
                                 <a
                                   href={retreat.externalLink}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
+                                  target={retreat.externalLink.startsWith('mailto:') ? undefined : '_blank'}
+                                  rel={retreat.externalLink.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                                   onClick={(e) => {
                                     e.stopPropagation();
                                   }}
-                                  className="px-6 py-2.5 rounded-full bg-[#65744B] hover:bg-[#586640] text-white font-semibold text-sm transition-all shadow cursor-pointer inline-flex items-center justify-center gap-1.5"
+                                  className="px-6 py-2.5 rounded-full bg-[#65744B] hover:bg-[#586640] text-white font-semibold text-sm transition-all shadow cursor-pointer inline-flex items-center justify-center gap-2"
+                                  title={retreat.externalLink.startsWith('mailto:') ? 'Napsat e-mail na straznickejogovani@gmail.com' : undefined}
                                 >
-                                  {retreat.ctaText || 'Mám zájem'}
+                                  {retreat.externalLink.startsWith('mailto:') && <Mail className="w-4 h-4" />}
+                                  <span>{retreat.ctaText || 'Mám zájem'}</span>
                                 </a>
                               ) : (
                                 <button
@@ -231,10 +302,11 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
                                   }}
                                   className="px-6 py-2.5 rounded-full bg-[#65744B] hover:bg-[#586640] text-white font-semibold text-sm transition-all shadow cursor-pointer"
                                 >
-                                  Mám zájem o pobyt
+                                  {retreat.ctaText || 'Mám zájem o pobyt'}
                                 </button>
                               )}
                             </div>
+                          )}
                           </div>
                         </div>
                       </div>
@@ -252,7 +324,11 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
                       <span>•</span>
                       <span>{activeRetreat.location}</span>
                       <span>•</span>
-                      <span className="font-bold text-[#65744B]">{activeRetreat.price.toLocaleString('cs-CZ')} Kč</span>
+                      <span className="font-bold text-[#65744B]">
+                        {typeof activeRetreat.price === 'number'
+                          ? `${activeRetreat.price.toLocaleString('cs-CZ')} Kč`
+                          : 'Vstup volný'}
+                      </span>
                     </div>
                   </div>
 
@@ -384,10 +460,10 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
             initial={{ opacity: 0, scale: 0.9, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 10 }}
-            className="relative z-10 max-w-2xl sm:max-w-3xl w-full max-h-[94vh] bg-[#1E434C] rounded-2xl shadow-2xl overflow-hidden flex flex-col items-center justify-between border border-white/20"
+            className={`relative z-10 max-w-2xl sm:max-w-3xl w-full max-h-[94vh] ${activeRetreat.posterBg || 'bg-[#1E434C]'} rounded-2xl shadow-2xl overflow-hidden flex flex-col items-center justify-between border border-white/20`}
           >
             {/* Top Bar */}
-            <div className="w-full bg-[#17353C] text-white px-5 py-3.5 flex items-center justify-between border-b border-white/10 shrink-0">
+            <div className="w-full bg-black/45 backdrop-blur-sm text-white px-5 py-3.5 flex items-center justify-between border-b border-white/10 shrink-0">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#A3B18A]" />
                 <span className="font-serif text-lg text-white">Plakát – {activeRetreat.title}</span>
@@ -413,7 +489,7 @@ export const RetreatsModal: React.FC<RetreatsModalProps> = ({
             </div>
 
             {/* Footer */}
-            <div className="w-full bg-[#17353C] px-5 py-3 flex items-center justify-between border-t border-white/10 text-xs text-[#A3B18A] shrink-0">
+            <div className="w-full bg-black/45 backdrop-blur-sm px-5 py-3 flex items-center justify-between border-t border-white/10 text-xs text-[#ECE8E2] shrink-0">
               <span>{activeRetreat.location} • {activeRetreat.date}</span>
               <button
                 type="button"
