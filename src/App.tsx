@@ -104,6 +104,7 @@ export default function App() {
       <GalleryModal
         isOpen={activeModal === 'gallery'}
         onClose={handleCloseModal}
+        onOpenRetreats={() => handleOpenModal('retreats')}
       />
 
       <PrivacyModal

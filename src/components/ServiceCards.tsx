@@ -79,7 +79,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({
           {/* Background image */}
           <img
             src={IMAGES.lesson}
-            alt="Jógová lekce v prosvětleném studiu"
+            alt="Lekce jógy"
             referrerPolicy="no-referrer"
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />

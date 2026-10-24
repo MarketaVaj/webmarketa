@@ -1,116 +1,34 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ChevronLeft, ChevronRight, Sparkles, MapPin, Tag } from 'lucide-react';
-import { IMAGES } from '../assets/images';
+import { X, ChevronLeft, ChevronRight, Sparkles, Calendar, Maximize2 } from 'lucide-react';
 
 interface GalleryModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenRetreats?: () => void;
 }
 
-interface GalleryItem {
+interface GalleryPhoto {
   id: string;
-  title: string;
-  category: 'retreats' | 'studio' | 'events';
-  categoryLabel: string;
-  location: string;
   image: string;
-  description: string;
 }
 
-const GALLERY_ITEMS: GalleryItem[] = [
-  {
-    id: 'g-1',
-    title: 'Ranní protažení na louce',
-    category: 'retreats',
-    categoryLabel: 'Jógové pobyty',
-    location: 'Luhačovice / Bílé Karpaty',
-    image: IMAGES.pobyty,
-    description: 'Klidné ranní lekce v náručí přírody, kde čerstvý vzduch a zpěv ptáků doplňují každý nádech a výdech.',
-  },
-  {
-    id: 'g-2',
-    title: 'Jógové studio Strážnice',
-    category: 'studio',
-    categoryLabel: 'Studio a lekce',
-    location: 'Strážnice, Skácelova 898',
-    image: IMAGES.studio,
-    description: 'Prosvětlený, voňavý prostor vytvořený pro vaše zklidnění, protažení a načerpání nové životní energie.',
-  },
-  {
-    id: 'g-3',
-    title: 'Plynulá vinyasa v sále',
-    category: 'studio',
-    categoryLabel: 'Studio a lekce',
-    location: 'Strážnice',
-    image: IMAGES.lesson,
-    description: 'Společná praxe zaměřená na vědomý pohyb, správné nastavení těla a hluboký dech v harmonickém kruhu.',
-  },
-  {
-    id: 'g-4',
-    title: 'Víkendový wellness pobyt – Žítková',
-    category: 'retreats',
-    categoryLabel: 'Jógové pobyty',
-    location: 'Penzion Žítková, Bílé Karpaty',
-    image: IMAGES.zitkovaPoster,
-    description: 'Kouzelná krajina Žítkové, bylinky, jóga, masáže a hluboký odpočinek uprostřed karpatkých strání.',
-  },
-  {
-    id: 'g-5',
-    title: 'Jógový víkend – Hotel Niva Luhačovice',
-    category: 'retreats',
-    categoryLabel: 'Jógové pobyty',
-    location: 'Luhačovice – Pozlovice',
-    image: IMAGES.poster,
-    description: 'Kombinace jógových bloků, luxusního wellness, minerálních pramenů a společného sdílení.',
-  },
-  {
-    id: 'g-6',
-    title: 'Beseda: Indie – země chutí, vůní a jógy',
-    category: 'events',
-    categoryLabel: 'Akce a besedy',
-    location: 'Strážnice',
-    image: IMAGES.indiePoster,
-    description: 'Cestovatelské povídání o kolébce jógy, úchvatných chrámech, indickém koření a životě plném kontrastů.',
-  },
-  {
-    id: 'g-7',
-    title: 'Jóga v přírodě a lesní klid',
-    category: 'retreats',
-    categoryLabel: 'Jógové pobyty',
-    location: 'Bílé Karpaty',
-    image: IMAGES.outdoor,
-    description: 'Zastavení v rychlém tempu všedních dnů, bosá chůze trávou a propojení s elementy přírody.',
-  },
-  {
-    id: 'g-8',
-    title: 'Čajový rituál a chvíle pro sebe',
-    category: 'studio',
-    categoryLabel: 'Studio a lekce',
-    location: 'Strážnice',
-    image: IMAGES.journal,
-    description: 'Hřejivý bylinkový čaj po lekci, prostor pro zápisky, zklidnění mysli a příjemný rozhovor.',
-  },
-  {
-    id: 'g-9',
-    title: 'Západ slunce u vody a meditace',
-    category: 'retreats',
-    categoryLabel: 'Jógové pobyty',
-    location: 'Přehrada Luhačovice',
-    image: IMAGES.hero,
-    description: 'Chvíle ticha a ztišení při západu slunce, kdy se hladina zklidní stejně jako naše mysl.',
-  },
+const GALLERY_PHOTOS: GalleryPhoto[] = [
+  { id: 'g-1', image: '/assets/aistudio/uvodni_bee4b995.jpeg' },
+  { id: 'g-2', image: '/assets/aistudio/fotogalerie_9503de37.jpeg' },
+  { id: 'g-3', image: '/assets/aistudio/IMG_4096_d48cf24a.jpeg' },
+  { id: 'g-4', image: '/assets/aistudio/IMG_4098_7968d219.jpeg' },
+  { id: 'g-5', image: '/assets/aistudio/IMG_4102_e629b527.jpeg' },
+  { id: 'g-6', image: '/assets/aistudio/IMG_4097_d09f9c22.jpeg' },
+  { id: 'g-7', image: '/assets/aistudio/IMG_4100_cfa08a84.jpeg' },
 ];
 
-export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpen, onClose }) => {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'retreats' | 'studio' | 'events'>('all');
+export const GalleryModal: React.FC<GalleryModalProps> = ({
+  isOpen,
+  onClose,
+  onOpenRetreats,
+}) => {
   const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
-
-  if (!isOpen) return null;
-
-  const filteredItems = selectedCategory === 'all'
-    ? GALLERY_ITEMS
-    : GALLERY_ITEMS.filter((item) => item.category === selectedCategory);
 
   const openLightbox = (index: number) => {
     setActiveLightboxIndex(index);
@@ -120,21 +38,39 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpen, onClose }) =
     setActiveLightboxIndex(null);
   };
 
-  const handleNextPhoto = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNextPhoto = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     if (activeLightboxIndex !== null) {
-      setActiveLightboxIndex((activeLightboxIndex + 1) % filteredItems.length);
+      setActiveLightboxIndex((activeLightboxIndex + 1) % GALLERY_PHOTOS.length);
     }
   };
 
-  const handlePrevPhoto = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrevPhoto = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     if (activeLightboxIndex !== null) {
-      setActiveLightboxIndex((activeLightboxIndex - 1 + filteredItems.length) % filteredItems.length);
+      setActiveLightboxIndex((activeLightboxIndex - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length);
     }
   };
 
-  const activePhoto = activeLightboxIndex !== null ? filteredItems[activeLightboxIndex] : null;
+  React.useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (activeLightboxIndex === null) return;
+      if (event.key === 'Escape') {
+        closeLightbox();
+      } else if (event.key === 'ArrowRight') {
+        handleNextPhoto();
+      } else if (event.key === 'ArrowLeft') {
+        handlePrevPhoto();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeLightboxIndex]);
+
+  if (!isOpen) return null;
+
+  const activePhoto = activeLightboxIndex !== null ? GALLERY_PHOTOS[activeLightboxIndex] : null;
 
   return (
     <AnimatePresence>
@@ -149,7 +85,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpen, onClose }) =
         />
 
         {/* Modal Window */}
-        <div className="min-h-screen px-4 sm:px-6 py-8 flex items-center justify-center relative">
+        <div className="min-h-screen px-3 sm:px-6 py-6 sm:py-8 flex items-center justify-center relative">
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -158,7 +94,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpen, onClose }) =
             className="w-full max-w-6xl bg-[#F5F1EA] rounded-3xl shadow-2xl overflow-hidden relative z-10 border border-[#E3DDD1] flex flex-col max-h-[92vh]"
           >
             {/* Modal Header */}
-            <div className="sticky top-0 z-20 bg-[#F5F1EA]/95 backdrop-blur-md px-6 sm:px-10 py-6 border-b border-[#E3DDD1] flex items-center justify-between">
+            <div className="sticky top-0 z-20 bg-[#F5F1EA]/95 backdrop-blur-md px-6 sm:px-10 py-5 sm:py-6 border-b border-[#E3DDD1] flex items-center justify-between">
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#65744B] mb-1">
                   <Sparkles className="w-3.5 h-3.5" />
@@ -177,33 +113,11 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpen, onClose }) =
               </button>
             </div>
 
-            {/* Filter Tabs & Content */}
-            <div className="p-6 sm:p-10 overflow-y-auto space-y-8">
-              {/* Filter Buttons */}
-              <div className="flex flex-wrap items-center gap-2.5">
-                {[
-                  { id: 'all', label: 'Všechny fotografie' },
-                  { id: 'retreats', label: 'Jógové pobyty' },
-                  { id: 'studio', label: 'Studio & lekce' },
-                  { id: 'events', label: 'Akce a besedy' },
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setSelectedCategory(tab.id as typeof selectedCategory)}
-                    className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
-                      selectedCategory === tab.id
-                        ? 'bg-[#1E434C] text-white shadow-md'
-                        : 'bg-white/80 text-[#555] hover:bg-white border border-[#E3DDD1]'
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Photos Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredItems.map((item, index) => (
+            {/* Gallery Grid Content */}
+            <div className="p-5 sm:p-8 md:p-10 overflow-y-auto space-y-8">
+              {/* Photos Grid - No text captions */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                {GALLERY_PHOTOS.map((item, index) => (
                   <motion.div
                     key={item.id}
                     layout
@@ -211,87 +125,84 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpen, onClose }) =
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.04 }}
                     onClick={() => openLightbox(index)}
-                    className="group bg-white rounded-2xl overflow-hidden border border-[#E8E2D6] shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer flex flex-col"
+                    className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#DCD4C8] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer bg-[#ECE8E2]"
                   >
-                    {/* Image thumbnail */}
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[#ECE8E2]">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <span className="text-white text-xs font-medium tracking-wide uppercase bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
-                          Zvětšit foto
-                        </span>
-                      </div>
-                      <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[#1E434C] text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-sm">
-                        {item.categoryLabel}
-                      </span>
-                    </div>
-
-                    {/* Card Description */}
-                    <div className="p-5 flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center gap-1.5 text-xs text-[#65744B] font-medium mb-1">
-                          <MapPin className="w-3.5 h-3.5 shrink-0" />
-                          <span>{item.location}</span>
-                        </div>
-                        <h3 className="font-serif text-lg font-semibold text-[#1E434C] group-hover:text-[#65744B] transition-colors leading-snug">
-                          {item.title}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-[#666] line-clamp-2 mt-2 leading-relaxed">
-                          {item.description}
-                        </p>
+                    <img
+                      src={item.image}
+                      alt="Strážnické jógování"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm text-[#1E434C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <Maximize2 className="w-5 h-5" />
                       </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Bottom warm note */}
-              <div className="bg-[#EAE4D7] rounded-2xl p-6 sm:p-8 text-center border border-[#DDD5C5]">
-                <h4 className="font-serif text-xl text-[#1E434C] mb-2 font-medium">
+              {/* Bottom Actions Banner */}
+              <div className="bg-[#EAE4D7] rounded-3xl p-6 sm:p-8 text-center border border-[#DDD5C5] space-y-4">
+                <h4 className="font-serif text-2xl text-[#1E434C] font-normal">
                   Přijďte zažít atmosféru na vlastní kůži
                 </h4>
-                <p className="text-sm text-[#555] max-w-xl mx-auto mb-4">
+                <p className="text-sm text-[#555] max-w-xl mx-auto">
                   Každé setkání, pobyt i běžná lekce je jedinečným prostorem pro zklidnění, sdílení a radost z pohybu.
                 </p>
-                <a
-                  href="https://www.reservio.cz/b/straznicke-jogovani"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#65744B] hover:bg-[#586640] text-white font-medium text-sm transition-all shadow-md cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span>Rezervovat lekci online</span>
-                </a>
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href="https://www.reservio.cz/b/straznicke-jogovani"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#65744B] hover:bg-[#586640] text-white font-medium text-sm transition-all shadow-md cursor-pointer"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Rezervovat lekci</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      onOpenRetreats?.();
+                    }}
+                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#1E434C] hover:bg-[#16333a] text-white font-medium text-sm transition-all shadow-md cursor-pointer"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>Přehled pobytů a akcí</span>
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Fullscreen Lightbox */}
+        {/* Fullscreen Lightbox - Clean without captions */}
         <AnimatePresence>
           {activePhoto && (
             <div
               onClick={closeLightbox}
-              className="fixed inset-0 z-60 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+              className="fixed inset-0 z-60 bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
             >
-              <button
-                onClick={closeLightbox}
-                className="absolute top-6 right-6 z-70 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-all hover:rotate-90 cursor-pointer"
-                aria-label="Zavřít zobrazení"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              {/* Top controls */}
+              <div className="absolute top-4 sm:top-6 inset-x-4 sm:inset-x-8 flex items-center justify-between text-white z-70 pointer-events-none">
+                <span className="text-xs sm:text-sm font-medium tracking-wider bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-sm pointer-events-auto">
+                  {(activeLightboxIndex ?? 0) + 1} / {GALLERY_PHOTOS.length}
+                </span>
+                <button
+                  onClick={closeLightbox}
+                  className="w-11 h-11 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-all hover:rotate-90 cursor-pointer pointer-events-auto"
+                  aria-label="Zavřít zobrazení"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
 
               {/* Previous button */}
               <button
                 onClick={handlePrevPhoto}
-                className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-70 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer"
+                className="absolute left-3 sm:left-8 top-1/2 -translate-y-1/2 z-70 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer"
                 aria-label="Předchozí fotografie"
               >
                 <ChevronLeft className="w-7 h-7" />
@@ -300,42 +211,26 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpen, onClose }) =
               {/* Next button */}
               <button
                 onClick={handleNextPhoto}
-                className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-70 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer"
+                className="absolute right-3 sm:right-8 top-1/2 -translate-y-1/2 z-70 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer"
                 aria-label="Další fotografie"
               >
                 <ChevronRight className="w-7 h-7" />
               </button>
 
-              {/* Lightbox content card */}
+              {/* Photo Display */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                exit={{ opacity: 0, scale: 0.96 }}
                 onClick={(e) => e.stopPropagation()}
-                className="max-w-4xl max-h-[90vh] flex flex-col items-center bg-[#1E2325] text-white rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                className="max-w-5xl max-h-[85vh] flex items-center justify-center rounded-2xl overflow-hidden shadow-2xl"
               >
-                <div className="max-h-[68vh] overflow-hidden flex items-center justify-center bg-black/40">
-                  <img
-                    src={activePhoto.image}
-                    alt={activePhoto.title}
-                    referrerPolicy="no-referrer"
-                    className="max-h-[68vh] w-auto max-w-full object-contain"
-                  />
-                </div>
-                <div className="p-5 sm:p-6 w-full bg-[#1E2325] border-t border-white/10">
-                  <div className="flex items-center justify-between text-xs text-[#A3B18A] uppercase tracking-wider mb-1 font-semibold">
-                    <span>{activePhoto.categoryLabel} &bull; {activePhoto.location}</span>
-                    <span>
-                      {(activeLightboxIndex ?? 0) + 1} / {filteredItems.length}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-2xl text-white font-normal mb-2">
-                    {activePhoto.title}
-                  </h3>
-                  <p className="text-sm text-gray-300 leading-relaxed font-sans">
-                    {activePhoto.description}
-                  </p>
-                </div>
+                <img
+                  src={activePhoto.image}
+                  alt="Strážnické jógování"
+                  referrerPolicy="no-referrer"
+                  className="max-h-[85vh] w-auto max-w-full object-contain select-none rounded-xl"
+                />
               </motion.div>
             </div>
           )}

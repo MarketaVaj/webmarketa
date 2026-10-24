@@ -18,7 +18,7 @@ export const IMAGES = {
   hero: heroImage,
   studio: studioImage,
   mountain: mountainImage,
-  lesson: lessonImage,
+  lesson: '/assets/aistudio/tenerife_aafdfe61.jpg',
   journal: journalImage,
   voucher: voucherImage,
   poster: posterImage,

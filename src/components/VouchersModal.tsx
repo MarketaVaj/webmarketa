@@ -434,16 +434,42 @@ export const VouchersModal: React.FC<VouchersModalProps> = ({ isOpen, onClose })
                     <CheckCircle className="w-10 h-10" />
                   </div>
 
-                  <div className="space-y-3 max-w-lg mx-auto">
+                  <div className="space-y-4 max-w-xl mx-auto">
                     <h4 className="font-serif text-2xl sm:text-3xl text-[#24211D]">
-                      Děkuji za Vaši objednávku!
+                      Děkuji za Váš zájem o poukaz.
                     </h4>
-                    <p className="text-base sm:text-lg text-[#3B3731] font-sans leading-relaxed bg-white p-6 rounded-2xl border border-[#DCD4C8] shadow-sm whitespace-pre-line">
-                      {"Vaše objednávka byla odeslána, budu Vás kontaktovat jakmile bude váš poukaz připraven.\nKrásný den, Markéta"}
-                    </p>
+                    <div className="text-base text-[#3B3731] font-sans leading-relaxed bg-white p-6 sm:p-7 rounded-2xl border border-[#DCD4C8] shadow-sm space-y-3 text-left">
+                      <p>
+                        V tomto okamžiku by se vám měl otevřít Váš poštovní klient a vy odešlete Vaši objednávku na email{' '}
+                        <a
+                          href="mailto:straznickejogovani@gmail.com"
+                          className="font-medium text-[#65744B] underline hover:text-[#586640]"
+                        >
+                          straznickejogovani@gmail.com
+                        </a>.
+                      </p>
+                      <p>
+                        Pokud se tak nestalo klikněte prosím na tlačítko <strong>Zpět</strong>, udělejte si fotku vámi zvoleného poukazu a pošlete ji prosím na výše zmíněnou adresu nebo do Facebook zprávy Strážnikého jógování.
+                      </p>
+                      <p className="pt-2 text-[#24211D]">
+                        Krásný den,<br />
+                        Markéta
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="pt-4">
+                  <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOrderedSuccess(false);
+                        setShowSummary(true);
+                      }}
+                      className="px-6 py-3 rounded-full border-2 border-[#65744B] text-[#65744B] hover:bg-[#65744B]/10 font-semibold text-sm transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      Zpět
+                    </button>
                     <button
                       type="button"
                       onClick={handleReset}
@@ -479,7 +505,7 @@ export const VouchersModal: React.FC<VouchersModalProps> = ({ isOpen, onClose })
                 >
                   <div className="flex items-center justify-between border-b border-[#ECE6DD] pb-4">
                     <h4 className="font-serif text-2xl font-normal text-[#24211D]">
-                      Shrnutí objednávky
+                      Souhrn objednávky
                     </h4>
                     <button
                       type="button"

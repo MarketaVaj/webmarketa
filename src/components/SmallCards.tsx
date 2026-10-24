@@ -45,8 +45,8 @@ export const SmallCards: React.FC<SmallCardsProps> = ({
           className="group relative h-[260px] sm:h-[280px] lg:h-[300px] rounded-[18px] overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all duration-500 flex flex-col justify-end p-7 sm:p-8 text-white"
         >
           <img
-            src={IMAGES.outdoor}
-            alt="Jógové chvíle a atmosféra ve fotogalerii"
+            src="/assets/aistudio/fotogalerie_9503de37.jpeg"
+            alt="Fotogalerie – Strážnické jógování"
             referrerPolicy="no-referrer"
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
