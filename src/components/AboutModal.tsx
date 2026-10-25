@@ -122,15 +122,19 @@ export const AboutModal: React.FC<AboutModalProps> = ({
                 {/* Flowing text wrapping around image and continuing full-width */}
                 <div className="space-y-4 font-sans text-sm sm:text-base text-[#3B3731] leading-relaxed">
                   <p className="leading-relaxed">
-                    Moje jógová cesta začala po utlumení jiné cesty, folklorní. Od mala jsem se věnovala lidovému tanci, rodiče vedoucí souborů, aktivní folkloristi. Co jsem se naučila chodit, začala jsem tancovat. Pak ale přišla práce, osm a více hodin denně na židli, na dojíždění do Strážnice nebylo tolik času a na pravidelné páteční a nedělní nácviky také ne. Tato kombinace se podepsala na mých zádech a začali se objevovat první bolístky. A protože všechno zlé je k něčemu dobré, dostala se do mého života nová &quot;pohybová aktivita&quot;, které zafungovala. Tak se stalo, že folklorní nácviky vystřídaly ranní lekce jógy a jak čas plynul a práce bylo více a více začala jsem zjišťovat, že pohybová aktivita není jenom o tom pohybu, ale také o sklidnění, urovnání si myšlenek, dechu, stabilitě, a že to do sebe pěkně zapadá.
+                    Moje jógová cesta začala po utlumení jiné cesty, folklorní. Rodiče folkloristi, takže co jsem se naučila chodit, začala jsem tancovat. Pak ale přišla práce, sedavé zaměstnání v Brně, na dojíždění do Strážnice nebylo tolik času a na pravidelné páteční a nedělní nácviky také ne.
                   </p>
 
                   <p className="leading-relaxed">
-                    Po cca 5ti letech praxe přišel dotaz od mojí lektorky na instruktorský kurz, který jsem brala jako fajn příležitost na prohloubení své vlastní jógové praxe. Postupem času, malými krůžky, přicházeli první lekce v Brně a po Covidovém stěhování i vlastní lekce ve Strážnici. Někteří si možná ještě vzpomenou na jejich &quot;skromé lekce&quot;, kdy přišel jeden, dva a tři účastníci už byli obrovský svátek, ale postupek let se to změnilo a jógová komunita se začala rozrůstat.
+                    Tato kombinace se podepsala na mých zádech a začaly se objevovat první bolístky. A protože všechno zlé je k něčemu dobré, dostala se do mého života nová &quot;pohybová aktivita&quot;, jóga, které zafungovala. Tím se stalo, že folklorní nácviky vystřídaly ranní lekce jógy a jak čas plynul začala jsem zjišťovat, že pohybová aktivita není jenom o tom pohybu, ale také o sklidnění se, urovnání si myšlenek, dechu, stabilitě, a že to do sebe pěkně zapadá.
                   </p>
 
                   <p className="leading-relaxed">
-                    Pro mně obrosvký závazek a chuť posouvat svou vlastní praxi, své znalosti, a zkušenosti dál a dál a moci je předávat ostatním. Je to nekončící process, člověk je věčným studentem, ale je to krásná cesta poznání a pomoci a pomoci zároveň.
+                    Po cca 5ti letech praxe přišel dotaz od mojí lektorky na instruktorský kurz, který jsem brala jako fajn příležitost na prohloubení své vlastní jógové praxe. Postupem času, malými krůžky, přicházeli první lekce v Brně a po Covidovém stěhování a vlastní lekce ve Strážnici. Ze začátku to byly spíše &quot;skromé lekce&quot;, kdy přišel jeden, dva a maximálně tři účastníci, ale po letech se Strážnická jógová komunita začala rozrůstat.
+                  </p>
+
+                  <p className="leading-relaxed">
+                    Pro mně obrosvký závazek a chuť posouvat svou vlastní praxi, své znalosti, a zkušenosti dál a dál a moci je předávat ostatním. Je to nekončící process, člověk je věčným studentem, ale je to krásná cesta poznání, pomoci a předávání ostatním zároveň.
                   </p>
                 </div>
 
