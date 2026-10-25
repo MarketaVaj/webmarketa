@@ -9,6 +9,49 @@ interface AboutModalProps {
   onOpenReservation: () => void;
 }
 
+const courses = [
+  {
+    title: 'Vzdělávací program: Instruktor jógy (150 hodin)',
+    year: '2020',
+    issuer: 'Majda agency s.r.o.',
+  },
+  {
+    title: 'Principy zdravého pohybu a vývojová kineziologie (20 hodin)',
+    year: '2020',
+    issuer: 'Lenka Oravcová',
+  },
+  {
+    title: 'Seminář Fyziologie a bolesti krční páteře (12 hodin)',
+    year: '2022',
+    issuer: 'Yoga World s.r.o.',
+  },
+  {
+    title: 'Nadstavbový kurz Jóga pro zdravá záda (50 hodin)',
+    year: '2023',
+    issuer: 'Yoga World s.r.o.',
+  },
+  {
+    title: 'Učitelský trénink Chakra Vinyasa Yoga & Aromatherapy (30 hodin)',
+    year: '2024',
+    issuer: 'DVA JÓGA ATELIÉR',
+  },
+  {
+    title: 'Restorativní jóga (20 hodin)',
+    year: '2026',
+    issuer: 'Karma Škola Jógy',
+  },
+  {
+    title: 'Yoga & Dance Spring Festival Ostrava – účastník',
+    year: '2024, 2025, 2026',
+    issuer: 'Ostrava',
+  },
+  {
+    title: 'Jógabraní Hustopeče – účastník',
+    year: '2022, 2024, 2025, 2026',
+    issuer: 'Hustopeče',
+  },
+];
+
 export const AboutModal: React.FC<AboutModalProps> = ({
   isOpen,
   onClose,
@@ -45,7 +88,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
                     O mně – Moje jógová cesta
                   </h3>
                   <p className="text-xs text-[#ECE8E2] font-sans">
-                    Markéta • Zakladatelka Strážnického jogování
+                    Markéta • Strážnické jógování
                   </p>
                 </div>
               </div>
@@ -60,54 +103,89 @@ export const AboutModal: React.FC<AboutModalProps> = ({
 
             {/* Scrollable Content */}
             <div className="p-6 sm:p-8 space-y-8 overflow-y-auto">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                <div className="md:col-span-5 relative h-72 md:h-96 rounded-2xl overflow-hidden border border-[#DCD4C8] shadow-md">
+              <div className="block">
+                {/* Heading */}
+                <h4 className="font-serif text-2xl sm:text-3xl font-normal text-[#24211D] leading-snug mb-5">
+                  „Zdraví, klid, dech, učení se, pomoc, zastavení, nekončící proces....“
+                </h4>
+
+                {/* Floated image in right corner */}
+                <div className="w-full sm:w-[280px] md:w-[330px] sm:float-right sm:ml-6 md:ml-8 mb-5 rounded-2xl overflow-hidden border border-[#DCD4C8] shadow-md relative group">
                   <img
-                    src={IMAGES.journal}
-                    alt="Markéta - Strážnické jogování"
+                    src={IMAGES.templeAbout}
+                    alt="Markéta v chrámu - Strážnické jógování"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-auto max-h-[460px] object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white font-serif text-lg">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-3 left-3 text-white font-serif text-sm drop-shadow-md">
                     Markéta, Strážnice
                   </div>
                 </div>
 
-                <div className="md:col-span-7 space-y-4 font-sans text-sm sm:text-base text-[#56514A] leading-relaxed">
-                  <h4 className="font-serif text-3xl font-normal text-[#24211D] leading-snug">
-                    „Jóga pro mě není o dokonalé pozici, ale o návratu k vlastnímu dechu a vnímání přítomnosti.“
-                  </h4>
-
-                  <p>
-                    Vítám vás ve svém komorním prostoru. Moje cesta k józe začala před více než osmi lety, kdy jsem v rušném životě hledala ostrůvek klidu, kde bych se mohla zastavit a zregenerovat síly.
+                {/* Flowing text wrapping around image and continuing full-width */}
+                <div className="space-y-4 font-sans text-sm sm:text-base text-[#3B3731] leading-relaxed">
+                  <p className="leading-relaxed">
+                    Moje jógová cesta začala po utlumení jiné cesty, folklorní. Od mala jsem se věnovala lidovému tanci, rodiče vedoucí souborů, aktivní folkloristi. Co jsem se naučila chodit, začala jsem tancovat. Pak ale přišla práce, osm a více hodin denně na židli, na dojíždění do Strážnice nebylo tolik času a na pravidelné páteční a nedělní nácviky také ne. Tato kombinace se podepsala na mých zádech a začali se objevovat první bolístky. A protože všechno zlé je k něčemu dobré, dostala se do mého života nová &quot;pohybová aktivita&quot;, které zafungovala. Tak se stalo, že folklorní nácviky vystřídaly ranní lekce jógy a jak čas plynul a práce bylo více a více začala jsem zjišťovat, že pohybová aktivita není jenom o tom pohybu, ale také o sklidnění, urovnání si myšlenek, dechu, stabilitě, a že to do sebe pěkně zapadá.
                   </p>
 
-                  <p>
-                    Postupem času se z osobní praxe stala hluboká vášeň a touha předávat tento pocit rovnováhy dále. Založila jsem <strong className="text-[#24211D]">Strážnické jogování</strong> jako bezpečné místo bez hodnocení, kde může každý cvičit podle možností svého těla.
+                  <p className="leading-relaxed">
+                    Po cca 5ti letech praxe přišel dotaz od mojí lektorky na instruktorský kurz, který jsem brala jako fajn příležitost na prohloubení své vlastní jógové praxe. Postupem času, malými krůžky, přicházeli první lekce v Brně a po Covidovém stěhování i vlastní lekce ve Strážnici. Někteří si možná ještě vzpomenou na jejich &quot;skromé lekce&quot;, kdy přišel jeden, dva a tři účastníci už byli obrovský svátek, ale postupek let se to změnilo a jógová komunita se začala rozrůstat.
                   </p>
 
-                  <div className="pt-2 flex flex-wrap gap-3">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#65744B] bg-[#65744B]/10 px-3 py-1.5 rounded-full">
-                      <Award className="w-4 h-4" />
-                      <span>Certifikovaná lektorka Hatha & Vinyasa Yoga (RYT 200)</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#65744B] bg-[#65744B]/10 px-3 py-1.5 rounded-full">
-                      <MapPin className="w-4 h-4" />
-                      <span>Slovácko & Strážnice</span>
-                    </div>
+                  <p className="leading-relaxed">
+                    Pro mně obrosvký závazek a chuť posouvat svou vlastní praxi, své znalosti, a zkušenosti dál a dál a moci je předávat ostatním. Je to nekončící process, člověk je věčným studentem, ale je to krásná cesta poznání a pomoci a pomoci zároveň.
+                  </p>
+                </div>
+
+                {/* Badges */}
+                <div className="clear-both pt-4 flex flex-wrap gap-2.5">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-[#65744B] bg-[#65744B]/10 px-3.5 py-1.5 rounded-full">
+                    <Award className="w-4 h-4" />
+                    <span>Instruktorka jógy</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-[#65744B] bg-[#65744B]/10 px-3.5 py-1.5 rounded-full">
+                    <MapPin className="w-4 h-4" />
+                    <span>Strážnice & Slovácko</span>
                   </div>
                 </div>
               </div>
 
-              {/* Philosophy quote */}
-              <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#DCD4C8] space-y-3 text-center max-w-2xl mx-auto shadow-sm">
-                <p className="font-serif italic text-xl text-[#24211D]">
-                  „Když zklidníme dech, zklidní se i naše mysl. A v tichu mysli nacházíme odpovědi na to, co v životě opravdu potřebujeme.“
-                </p>
-                <span className="text-xs font-semibold text-[#65744B] uppercase tracking-widest block">
-                  — MARKÉTA
-                </span>
+              {/* Courses Table */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-2 text-[#24211D]">
+                  <Award className="w-5 h-5 text-[#65744B]" />
+                  <h5 className="font-serif text-xl sm:text-2xl font-normal">
+                    Přehled kurzů a vzdělání
+                  </h5>
+                </div>
+
+                <div className="overflow-x-auto rounded-2xl border border-[#DCD4C8] bg-white shadow-sm">
+                  <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                      <tr className="bg-[#EFEAE2]/75 text-[#24211D] border-b border-[#DCD4C8] font-semibold">
+                        <th className="py-3.5 px-4 sm:px-6">Název školení / akce</th>
+                        <th className="py-3.5 px-4 sm:px-6 text-center whitespace-nowrap">Rok absolvování</th>
+                        <th className="py-3.5 px-4 sm:px-6">Kdo certifikát vydal / Místo</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#ECE6DD] text-[#3B3731]">
+                      {courses.map((course, idx) => (
+                        <tr key={idx} className="hover:bg-[#FAF7F2] transition-colors">
+                          <td className="py-3.5 px-4 sm:px-6 font-medium text-[#24211D]">
+                            {course.title}
+                          </td>
+                          <td className="py-3.5 px-4 sm:px-6 text-center whitespace-nowrap font-semibold text-[#65744B]">
+                            {course.year}
+                          </td>
+                          <td className="py-3.5 px-4 sm:px-6 text-[#56514A]">
+                            {course.issuer}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               <div className="pt-4 border-t border-[#DCD4C8] flex items-center justify-between gap-4">

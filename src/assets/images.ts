@@ -31,4 +31,5 @@ export const IMAGES = {
   voucherDesign3,
   indiePoster: '/assets/aistudio/Indie_Vaj_nerov__A3_8535b793.jpg',
   zitkovaPoster: '/assets/aistudio/Brown_Floral_Massage_Retreat_Poster_a57e977f.png',
+  templeAbout: '/assets/aistudio/76072_63e040d3.jpg',
 };
