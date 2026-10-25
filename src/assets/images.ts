@@ -19,7 +19,7 @@ export const IMAGES = {
   studio: studioImage,
   mountain: mountainImage,
   lesson: '/assets/aistudio/tenerife_aafdfe61.jpg',
-  journal: journalImage,
+  journal: '/assets/aistudio/76072_63e040d3.jpg',
   voucher: voucherImage,
   poster: posterImage,
   pobyty: pobytyImage,

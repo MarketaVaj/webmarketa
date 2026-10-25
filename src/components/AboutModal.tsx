@@ -88,7 +88,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
                     O mně – Moje jógová cesta
                   </h3>
                   <p className="text-xs text-[#ECE8E2] font-sans">
-                    Markéta • Strážnické jógování
+                    Markéta Vajčnerová • Strážnické jógování
                   </p>
                 </div>
               </div>
@@ -117,10 +117,6 @@ export const AboutModal: React.FC<AboutModalProps> = ({
                     referrerPolicy="no-referrer"
                     className="w-full h-auto max-h-[460px] object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-3 left-3 text-white font-serif text-sm drop-shadow-md">
-                    Markéta, Strážnice
-                  </div>
                 </div>
 
                 {/* Flowing text wrapping around image and continuing full-width */}

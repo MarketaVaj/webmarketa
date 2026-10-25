@@ -22,7 +22,7 @@ export const SmallCards: React.FC<SmallCardsProps> = ({
         >
           <img
             src={IMAGES.journal}
-            alt="Zápisník, čaj a atmosféra pro O mně"
+            alt="O mně – Moje jógová cesta"
             referrerPolicy="no-referrer"
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
